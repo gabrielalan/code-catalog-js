@@ -28,6 +28,69 @@ class DoublyLinkedList {
 		this.tail = undefined;
 	}
 
+	/**
+	 * O(n)
+	 */
+	toArray() {
+		let current = this.head;
+		const list = [current];
+
+		while(current.next) {
+			current = current.next;
+			list.push(current);
+		}
+
+		return list;
+	}
+
+	/**
+	 * O(n)
+	 */
+	find(compare) {
+		let node;
+		let current = this.head;
+
+		while(!node) {
+			if (compare(current.data)) {
+				return current;
+			}
+
+			if (!current.next) {
+				return undefined;
+			}
+
+			current = current.next;
+		}
+	}
+
+	remove(node) {
+		if (!(node instanceof LinkedListNode)) {
+			throw new Error("Invalid node: You need to provide a valid node to remove. You can use .find() method");
+		}
+
+		const next = node.next;
+		const previous = node.previous;
+
+		if (!next && !previous && (node === this.head || node === this.tail)) {
+			return this.clear();
+		}
+
+		if (node === this.head) {
+			this.head = node.next;
+			this.head.setPrevious(undefined);
+		} else if (node === this.tail) {
+			this.tail = node.previous;
+			this.head.setNext(undefined);
+		} else {
+			previous.setNext(next);
+			next.setPrevious(previous);
+		}
+
+		node.eraseLinks();
+
+		return node;
+	}
+
 	shift() {
 		if (!this.head) {
 			return undefined;
@@ -74,6 +137,50 @@ class DoublyLinkedList {
 
 		this.head = undefined;
 		this.tail = undefined;
+
+		return node;
+	}
+
+	verifyNodes(anchor, data) {
+		let node = data instanceof LinkedListNode ? data : new LinkedListNode(data);
+
+		if (!(anchor instanceof LinkedListNode)) {
+			throw new Error("Invalid anchor node: You need to provide a valid node as anchor. You can use .find() method");
+		}
+
+		return node;
+	}
+
+	addAfter(anchor, data) {
+		let node = this.verifyNodes(anchor, data);
+
+		node.setPrevious(anchor);
+		
+		if (anchor === this.tail) {
+			this.tail = node;
+		} else {
+			node.setNext(anchor.next);
+			anchor.next.setPrevious(node);
+		}
+
+		anchor.setNext(node);
+
+		return node;
+	}
+
+	addBefore(anchor, data) {
+		let node = this.verifyNodes(anchor, data);
+
+		node.setNext(anchor);
+
+		if (anchor === this.head) {
+			this.head = node;
+		} else {
+			node.setPrevious(anchor.previous);
+			anchor.previous.setNext(node);
+		}
+
+		anchor.setPrevious(node);
 
 		return node;
 	}
