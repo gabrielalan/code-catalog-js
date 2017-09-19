@@ -20,6 +20,4 @@ function parenthesesAreBalanced(string) {
 	return stack.length === 0;
 }
 
-var tests = ['()()', '[()]', '{[()]}', '((([{}])))', '{{{', '}}}', '{[}]', '(])'];
-
-console.log(tests.map(parenthesesAreBalanced));
+module.exports = parenthesesAreBalanced;
