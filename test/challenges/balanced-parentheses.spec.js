@@ -8,6 +8,8 @@ describe('Balanced Parentheses', function() {
         assert.ok(parenthesesAreBalanced('[()]'));
         assert.ok(parenthesesAreBalanced('{[()]}'));
         assert.ok(parenthesesAreBalanced('((([{}])))'));
+        assert.ok(parenthesesAreBalanced('([])[]()'));
+        assert.ok(parenthesesAreBalanced('((([([])]))())'));
     });
 
     it('should return false when the pattern is wrong', function() {
@@ -15,6 +17,8 @@ describe('Balanced Parentheses', function() {
         assert.ok(!parenthesesAreBalanced('}}}'));
         assert.ok(!parenthesesAreBalanced('{[}]'));
         assert.ok(!parenthesesAreBalanced('(])'));
+        assert.ok(!parenthesesAreBalanced('([]]()'));
+        assert.ok(!parenthesesAreBalanced(']['));
     });
   });
 });
