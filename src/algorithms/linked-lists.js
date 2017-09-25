@@ -213,3 +213,8 @@ class DoublyLinkedList {
 		return node;
 	}
 }
+
+module.exports = {
+    LinkedListNode,
+    DoublyLinkedList
+};
