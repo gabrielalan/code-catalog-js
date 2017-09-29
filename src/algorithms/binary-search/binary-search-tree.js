@@ -11,6 +11,62 @@ class BinarySearchTree {
     }
 
     /**
+     * @param node BinarySearchNode instance of the node
+     *        use tree.find to get the node instance (or the return of insert)
+     * @returns BinarySearchNode | boolean
+     */
+    remove(node) {
+        if (node.isLeaf()) {
+            return this._removeLeafNode(node);
+        }
+
+        if ((node.right && !node.left) || (!node.right && node.left)) {
+            return this._removeSingleChildNode(node);
+        }
+
+        if (node.right && node.left) {
+            return this._removeDoubleChildNode(node);
+        }
+
+        return false;
+    }
+
+    _removeLeafNode(node) {
+        node.cleanParentRelation();
+
+        if (node === this.root)
+            this.root = undefined;
+
+        return node;
+    }
+
+    _removeDoubleChildNode(node) {
+        const smallestRight = this.findSmallestFrom(node.right);
+
+        node.setValue(smallestRight.value);
+
+        return this.remove(smallestRight);
+    }
+
+    _removeSingleChildNode(node) {
+        const child = node.right || node.left;
+
+        if (node !== this.root) {
+            node.getParent().replaceChild(node, child);
+        } else {
+            this.root = child;
+        }
+
+        node.setLeft(undefined);
+        node.setRight(undefined);
+        return node;
+    }
+
+    findSmallestFrom(node) {
+        return node.left ? this.findSmallestFrom(node.left) : node;
+    }
+
+    /**
      * @param value Any
      * @returns BinarySearchNode | boolean
      */
