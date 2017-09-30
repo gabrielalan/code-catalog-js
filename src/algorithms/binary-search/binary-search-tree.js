@@ -11,6 +11,17 @@ class BinarySearchTree {
     }
 
     /**
+     * O(n) since it iterate for each branch of each node
+     */
+    count(current = this.root) {
+        if (!current) {
+            return 0;
+        }
+
+        return 1 + this.count(current.right) + this.count(current.left);
+    }
+
+    /**
      * @param node BinarySearchNode instance of the node
      *        use tree.find to get the node instance (or the return of insert)
      * @returns BinarySearchNode | boolean
@@ -57,8 +68,8 @@ class BinarySearchTree {
             this.root = child;
         }
 
-        node.setLeft(undefined);
-        node.setRight(undefined);
+        node.setLeft(null);
+        node.setRight(null);
         return node;
     }
 
@@ -67,6 +78,8 @@ class BinarySearchTree {
     }
 
     /**
+     * O(log n) in avarage cases
+     * O(n) in cases when the value to find is on the deepest level
      * @param value Any
      * @returns BinarySearchNode | boolean
      */

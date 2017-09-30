@@ -1,9 +1,9 @@
 class BinaryTreeNode {
     constructor(value) {
         this.setValue(value);
-        this.setRight(undefined);
-        this.setLeft(undefined);
-        this.setParent(undefined, undefined);
+        this.setRight(null);
+        this.setLeft(null);
+        this.setParent(null, null);
     }
 
     isLeaf() {
@@ -22,7 +22,7 @@ class BinaryTreeNode {
 
         const direction = this.parent.direction === 'left' ? node.setLeft : node.setRight;
 
-        direction.call(node, undefined);
+        direction.call(node, null);
         return true;
     }
 
