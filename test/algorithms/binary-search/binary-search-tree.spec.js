@@ -33,6 +33,18 @@ describe('Binary Search Tree', () => {
         assert.equal(tree.find(-1), vM1);
     });
 
+    it('It should have a height method to return the deepest subtree level', () => {
+        const v5 = tree.insert(5);
+        const v6 = tree.insert(6);
+        const v7 = tree.insert(7);
+        const v1 = tree.insert(1);
+        const v3 = tree.insert(3);
+        const v4 = tree.insert(4);
+        const v45 = tree.insert(4.5);
+
+        assert.equal(tree.height(), 5);
+    });
+
     it('It should have a count method to return the number of all existent nodes', () => {
         const v1 = tree.insert(1);
         const v3 = tree.insert(3);

@@ -13,6 +13,17 @@ class BinarySearchTree {
     /**
      * O(n) since it iterate for each branch of each node
      */
+    height(current = this.root) {
+        if (!current) {
+            return 0;
+        }
+
+        return 1 + Math.max(this.height(current.right), this.height(current.left));
+    }
+
+    /**
+     * O(n) since it iterate for each branch of each node
+     */
     count(current = this.root) {
         if (!current) {
             return 0;
