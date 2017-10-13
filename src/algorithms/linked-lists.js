@@ -43,6 +43,10 @@ class DoublyLinkedList {
 		return list;
 	}
 
+	empty() {
+	    return !this.head && !this.tail;
+	}
+
 	/**
 	 * O(n)
 	 */

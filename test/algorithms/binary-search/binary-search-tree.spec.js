@@ -23,6 +23,33 @@ describe('Binary Search Tree', () => {
         assert.equal(v7.left, v6);
     });
 
+    /**
+     *        __4__
+     *       /     \
+     *      2       6
+     *     / \     / \
+     *    1   3   5   7
+     */
+    it('It should transform to array using breadth-first level traversal', () => {
+        const v4 = tree.insert(4);
+        const v6 = tree.insert(6);
+        const v2 = tree.insert(2);
+        const v3 = tree.insert(3);
+        const v1 = tree.insert(1);
+        const v5 = tree.insert(5);
+        const v7 = tree.insert(7);
+
+        const arr = tree.toArray(Tree.traversalAlgorithms.BREADTH_FIRST.LEVEL);
+
+        assert.equal(arr[0], 4);
+        assert.equal(arr[1], 2);
+        assert.equal(arr[2], 6);
+        assert.equal(arr[3], 1);
+        assert.equal(arr[4], 3);
+        assert.equal(arr[5], 5);
+        assert.equal(arr[6], 7);
+    });
+
     it('It should transform to array using depth-first-IN-order traversal', () => {
         const v4 = tree.insert(4);
         const v6 = tree.insert(6);

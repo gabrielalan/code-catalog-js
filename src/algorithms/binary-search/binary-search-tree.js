@@ -1,4 +1,5 @@
 const Node = require('./binary-search-node');
+const Queue = require('../queue');
 
 /**
  * Simplest binary search tree implementation
@@ -17,6 +18,9 @@ class BinarySearchTree {
         const list = [], push = value => list.push(value);
 
         switch(algorithm) {
+            case BinarySearchTree.traversalAlgorithms.BREADTH_FIRST.LEVEL:
+                this.levelTraversal(push);
+                break;
             case BinarySearchTree.traversalAlgorithms.DEPTH_FIRST.POST_ORDER:
                 this.postOrder(push);
                 break;
@@ -30,6 +34,32 @@ class BinarySearchTree {
         }
 
         return list;
+    }
+
+    /**
+     * Breadth-first level traversal
+     */
+    levelTraversal(fn) {
+        if (!this.root) {
+            return false;
+        }
+
+        const queue = new Queue();
+        let node;
+
+        queue.enqueue(this.root);
+
+        while(!queue.empty()) {
+            node = queue.dequeue().data;
+
+            fn(node.value);
+
+            if (node.left)
+                queue.enqueue(node.left);
+
+            if (node.right)
+                queue.enqueue(node.right);
+        }
     }
 
     /**
@@ -203,6 +233,9 @@ class BinarySearchTree {
 }
 
 BinarySearchTree.traversalAlgorithms = {
+    BREADTH_FIRST: {
+        LEVEL: 'LEVEL'
+    },
     DEPTH_FIRST: {
         IN_ORDER: 'IN_ORDER',
         PRE_ORDER: 'PRE_ORDER',

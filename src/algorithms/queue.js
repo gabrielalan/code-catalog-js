@@ -9,8 +9,8 @@ class Queue extends DoublyLinkedList {
 		return this.append(data);
 	}
 
-	dequeue(data) {
-		return this.shift(data);
+	dequeue() {
+		return this.shift();
 	}
 }
 
