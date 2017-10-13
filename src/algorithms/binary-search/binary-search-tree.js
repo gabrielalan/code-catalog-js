@@ -11,6 +11,67 @@ class BinarySearchTree {
     }
 
     /**
+     * Transforms the tree into a array using a given algorithm (pre-defined)
+     */
+    toArray(algorithm) {
+        const list = [], push = value => list.push(value);
+
+        switch(algorithm) {
+            case BinarySearchTree.traversalAlgorithms.DEPTH_FIRST.POST_ORDER:
+                this.postOrder(push);
+                break;
+            case BinarySearchTree.traversalAlgorithms.DEPTH_FIRST.PRE_ORDER:
+                this.preOrder(push);
+                break;
+            case BinarySearchTree.traversalAlgorithms.DEPTH_FIRST.IN_ORDER:
+            default:
+                this.inOrder(push);
+                break;
+        }
+
+        return list;
+    }
+
+    /**
+     * Depth-first postOrder traversal
+     */
+    postOrder(fn, node = this.root) {
+        if (!node) {
+            return false;
+        }
+
+        this.postOrder(fn, node.left);
+        this.postOrder(fn, node.right);
+        fn(node.value);
+    }
+
+    /**
+     * Depth-first preOrder traversal
+     */
+    preOrder(fn, node = this.root) {
+        if (!node) {
+            return false;
+        }
+
+        fn(node.value);
+        this.preOrder(fn, node.left);
+        this.preOrder(fn, node.right);
+    }
+
+    /**
+     * Depth-first inOrder traversal
+     */
+    inOrder(fn, node = this.root) {
+        if (!node) {
+            return false;
+        }
+
+        this.inOrder(fn, node.left);
+        fn(node.value);
+        this.inOrder(fn, node.right);
+    }
+
+    /**
      * O(n) since it iterate for each branch of each node
      */
     height(current = this.root) {
@@ -140,5 +201,13 @@ class BinarySearchTree {
         return false;
     }
 }
+
+BinarySearchTree.traversalAlgorithms = {
+    DEPTH_FIRST: {
+        IN_ORDER: 'IN_ORDER',
+        PRE_ORDER: 'PRE_ORDER',
+        POST_ORDER: 'POST_ORDER'
+    }
+};
 
 module.exports = BinarySearchTree;

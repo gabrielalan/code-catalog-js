@@ -23,6 +23,54 @@ describe('Binary Search Tree', () => {
         assert.equal(v7.left, v6);
     });
 
+    it('It should transform to array using depth-first-IN-order traversal', () => {
+        const v4 = tree.insert(4);
+        const v6 = tree.insert(6);
+        const v2 = tree.insert(2);
+        const v3 = tree.insert(3);
+        const v1 = tree.insert(1);
+        const v5 = tree.insert(5);
+        const v7 = tree.insert(7);
+
+        const arr = tree.toArray(Tree.traversalAlgorithms.DEPTH_FIRST.IN_ORDER);
+
+        assert.equal(arr[0], 1);
+        assert.equal(arr[3], 4);
+        assert.equal(arr[6], 7);
+    });
+
+    it('It should transform to array using depth-first-PRE-order traversal', () => {
+        const v4 = tree.insert(4);
+        const v6 = tree.insert(6);
+        const v2 = tree.insert(2);
+        const v3 = tree.insert(3);
+        const v1 = tree.insert(1);
+        const v5 = tree.insert(5);
+        const v7 = tree.insert(7);
+
+        const arr = tree.toArray(Tree.traversalAlgorithms.DEPTH_FIRST.PRE_ORDER);
+
+        assert.equal(arr[0], 4);
+        assert.equal(arr[1], 2);
+        assert.equal(arr[6], 7);
+    });
+
+    it('It should transform to array using depth-first-POST-order traversal', () => {
+        const v4 = tree.insert(4);
+        const v6 = tree.insert(6);
+        const v2 = tree.insert(2);
+        const v3 = tree.insert(3);
+        const v1 = tree.insert(1);
+        const v5 = tree.insert(5);
+        const v7 = tree.insert(7);
+
+        const arr = tree.toArray(Tree.traversalAlgorithms.DEPTH_FIRST.POST_ORDER);
+
+        assert.equal(arr[0], 1);
+        assert.equal(arr[1], 3);
+        assert.equal(arr[6], 4);
+    });
+
     it('It should find the right node', () => {
         const v1 = tree.insert(1);
         const v3 = tree.insert(3);
